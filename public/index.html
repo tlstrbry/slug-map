@@ -9,29 +9,29 @@
   </style>
 </head>
 <body>
-<div id="map"></div>
-<script type="text/javascript">
-ymaps.ready(init);
-function init() {
-    var map = new ymaps.Map("map", {
-        center: [59.9386, 30.3141], // Центр СПб
+  <div id="map"></div>
+  <script type="text/javascript">
+    ymaps.ready(init);
+    function init() {
+      var map = new ymaps.Map("map", {
+        center: [59.9386, 30.3141], // Центр СПБ
         zoom: 9
-    });
+      });
 
-    fetch('points.json')
+      fetch('points.json')
         .then(response => response.json())
         .then(data => {
-            data.forEach(point => {
-                var color = ['#00FF00', '#ADFF2F', '#FFFF00', '#FFA500', '#FF0000'][point.level - 1];
-                map.geoObjects.add(new ymaps.Placemark([point.lat, point.lon], {
-                    balloonContent: 'Уровень: ' + point.level
-                }, {
-                    preset: 'islands#circleIcon',
-                    iconColor: color
-                }));
-            });
+          data.forEach(point => {
+            var color = ['#00FF00', '#ADFF2F', '#FFFF00', '#FFA500', '#FF0000'][point.level - 1];
+            map.geoObjects.add(new ymaps.Placemark([point.lat, point.lon], {
+              balloonContent: 'Уровень: ' + point.level
+            }, {
+              preset: 'islands#circleIcon',
+              iconColor: color
+            }));
+          });
         });
-}
-</script>
+    }
+  </script>
 </body>
 </html>
